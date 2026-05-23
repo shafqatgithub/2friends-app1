@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c5c5d3",
+                    "secondary-fixed-dim": "#ffb690",
+                    "on-primary-container": "#90a8ff",
+                    "tertiary": "#00312c",
+                    "on-secondary-fixed": "#341100",
+                    "primary-fixed": "#dce1ff",
+                    "primary-container": "#1e3a8a",
+                    "outline": "#757682",
+                    "surface-dim": "#d8dadc",
+                    "on-tertiary-container": "#4ebdb0",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#00164e",
+                    "on-error": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "primary": "#00236f",
+                    "surface-variant": "#e0e3e5",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-background": "#191c1e",
+                    "on-tertiary-fixed": "#00201d",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#005049",
+                    "primary-fixed-dim": "#b6c4ff",
+                    "background": "#f7f9fb",
+                    "surface-tint": "#4059aa",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#eff1f3",
+                    "inverse-primary": "#b6c4ff",
+                    "on-secondary-container": "#5c2400",
+                    "on-surface": "#191c1e",
+                    "tertiary-container": "#004942",
+                    "inverse-surface": "#2d3133",
+                    "secondary-fixed": "#ffdbca",
+                    "tertiary-fixed": "#89f5e7",
+                    "surface-container-low": "#f2f4f6",
+                    "surface": "#f7f9fb",
+                    "tertiary-fixed-dim": "#6bd8cb",
+                    "secondary-container": "#fd761a",
+                    "on-surface-variant": "#444651",
+                    "on-primary-fixed-variant": "#264191",
+                    "error-container": "#ffdad6",
+                    "secondary": "#9d4300",
+                    "surface-container-high": "#e6e8ea",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#783200"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "12px",
+                    "stack-lg": "24px",
+                    "gutter": "16px",
+                    "stack-sm": "4px",
+                    "margin-mobile": "20px",
+                    "base": "8px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- TopAppBar -->
+<nav class="w-full top-0 sticky z-50 bg-surface dark:bg-surface-dim shadow-sm flex items-center justify-between px-margin-mobile py-base">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-variant/50 transition-colors active:scale-95 duration-150 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="arrow_back">arrow_back</span>
+</button>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim tracking-tight">2friends</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="hover:bg-surface-variant/50 transition-colors active:scale-95 duration-150 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="search">search</span>
+</button>
+<button class="hover:bg-surface-variant/50 transition-colors active:scale-95 duration-150 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="favorite">favorite</span>
+</button>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto pb-32">
+<div class="flex flex-col lg:flex-row gap-stack-lg p-margin-mobile lg:p-margin-desktop">
+<!-- Product Carousel Area -->
+<div class="w-full lg:w-3/5 space-y-stack-md">
+<div class="relative aspect-square overflow-hidden rounded-xl bg-white shadow-sm border border-outline-variant/20">
+<img alt="Product Hero" class="w-full h-full object-cover" data-alt="A premium, high-quality white minimalist wristwatch presented in a bright, professionally lit studio environment. The lighting is soft and high-key, emphasizing the clean lines and polished surfaces of the product. The overall aesthetic is modern and corporate, following a light-mode design with subtle blue and orange accents. The watch rests on a clean, light-colored surface with a soft-focus background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD2VPs8KDPKFZ4GUbN1Kha1BrrP71bcldVyCqYlAzTbDPh1k11ExxFB7MQvifBWkhLcWDgFBSQjY4q3tViC_cKmnxNKuKHpstjZ5Wl1YFxfq9gIwSw1gz1-DTdBzmnI4BoAT1y27mZSq6h9nIauEuw7kHWYuu6ZfK-_Eq2mHMnPpi_o8i0HC0NoiRZk4fsyOraKPRnESr7_IEw-N9b74x6CA55tbAcDIEz3QEwJGZlBHrVlLThBkP0SEcxVKjnr_PrdRExqSIaRxy"/>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+<!-- Thumbnails -->
+<div class="flex gap-stack-md overflow-x-auto no-scrollbar">
+<div class="flex-shrink-0 w-20 h-20 rounded-lg border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up thumbnail of a luxury wristwatch dial with metallic details in a bright corporate setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYemGeaY7J-17LjIEbMY9bjoIzSJdavBTsCHEd-Q7E_6MJuTqEzGfmqps_KixANbJUF5JlbwxU4ridL_njZFniEy3rvQWBHki22SpHzkmwRPqr1EiQK4OxLYW36xPEXraVB-3LMAVbThZi3NzdVrIHTRxaSPwBMHkn9uC-quLWyK2oyY06ntrdhWQhao26Z_Rvg2dMQTYgfgv6fteFz_dZW3ODlA1jCW8wwJlVl_FCvWfs6aUW2NLzWYmrMu9bbM2IDtwtV_Rbio27"/>
+</div>
+<div class="flex-shrink-0 w-20 h-20 rounded-lg border border-outline-variant/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Side profile thumbnail of a leather watch strap against a clean, light gray background with soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7SgZx8ubcqla2pWt7VDgNr0bhORQwT9R3ny9iNbzRYT7QaKiraEZxgYR7Zwi5iarfgQdG6ygzbf13-v0OYZeBswOegNtEOhfqA47LlOdkB69H2P3eVQuDp2NbMUhZu1UI35ZGyNGdITp5NGfLX6kIQ2r2WyHgc5KpJNKrj-Lhi-6Jq0TG-n1Rf5XFLf9Bx1RJb3dfDUKoo0MsWlkHrJQcy4fJjZJhACxnW-CYktdhtSDGvroy9ghB5PJrdK6w9lTtqQYL0B450qyW"/>
+</div>
+<div class="flex-shrink-0 w-20 h-20 rounded-lg border border-outline-variant/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Packaging detail of a premium accessory box in a brightly lit modern lifestyle setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCYsLGy2jQmT-F5twDh49Rm9_NE4BMV8g8jp5-vNlmZwphRT9XidVH60fSG53UwsuJSBO8WbY_kNQIdtNF0ZX3AyGjMyUOCJlq2NIgiASEaOcXN_a2uJtXGNRWtwB0kyeGQWop1qgjVfpt2tDq9JT7Pp0wtjaUf_zICRtVznnXTCRY8SgBENb6dvuB8M-WHJXyM0ycZTGlZ3yhqpB2cAn6P4fnNBUdFeKYx3f5QDBP0BKbNUzQ2IXXo0MkuQZ6q6BvH-ohgI24hiQt"/>
+</div>
+</div>
+</div>
+<!-- Product Details Area -->
+<div class="w-full lg:w-2/5 flex flex-col gap-stack-lg">
+<div class="space-y-stack-sm">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-label-lg font-label-lg text-secondary tracking-wider">PREMIUM COLLECTION</span>
+<h1 class="font-headline-lg text-headline-lg text-primary mt-1">Classic Chrono Slate</h1>
+</div>
+<div class="flex items-center gap-1 bg-surface-container px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md font-label-md text-on-surface">4.8</span>
+</div>
+</div>
+<p class="text-headline-md font-headline-md text-primary">$189.00</p>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+                    Elevate your everyday style with the Classic Chrono Slate. Crafted with precision-engineered Swiss movement and a sapphire crystal face, this timepiece balances timeless elegance with modern durability. Perfect for both the boardroom and the weekend escape.
+                </p>
+<!-- Selectors -->
+<div class="space-y-stack-md">
+<div>
+<span class="text-label-lg font-label-lg text-on-surface">Select Color</span>
+<div class="flex gap-4 mt-stack-md">
+<button class="w-10 h-10 rounded-full bg-slate-800 ring-2 ring-offset-2 ring-primary"></button>
+<button class="w-10 h-10 rounded-full bg-stone-300 ring-1 ring-outline-variant"></button>
+<button class="w-10 h-10 rounded-full bg-amber-900 ring-1 ring-outline-variant"></button>
+</div>
+</div>
+<div>
+<span class="text-label-lg font-label-lg text-on-surface">Size</span>
+<div class="flex gap-stack-md mt-stack-md">
+<button class="px-6 py-2 rounded-xl border-2 border-primary text-primary font-label-lg">40mm</button>
+<button class="px-6 py-2 rounded-xl border border-outline-variant text-on-surface-variant font-label-lg hover:border-primary transition-colors">44mm</button>
+</div>
+</div>
+</div>
+<!-- Hidden on mobile, visible on desktop desktop-cta -->
+<div class="hidden lg:flex flex-col gap-stack-md mt-6">
+<button class="w-full bg-secondary text-white py-4 rounded-xl font-headline-md shadow-lg hover:brightness-110 active:scale-95 transition-all">
+                        Add to Cart
+                    </button>
+<button class="w-full bg-white border border-primary text-primary py-4 rounded-xl font-label-lg hover:bg-primary/5 transition-all">
+                        Buy Now
+                    </button>
+</div>
+</div>
+</div>
+<!-- Related Products Section -->
+<section class="mt-stack-lg px-margin-mobile lg:px-margin-desktop">
+<div class="flex justify-between items-end mb-6">
+<h2 class="font-headline-md text-headline-md text-primary">Related Products</h2>
+<a class="text-label-lg font-label-lg text-secondary border-b border-secondary" href="#">View all</a>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<!-- Related Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant/10 group cursor-pointer">
+<div class="aspect-square rounded-lg overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A stylish leather watch strap in a dark brown tone shown in a bright corporate studio shot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWXWl4hi0VB1M2A_tqfq5dBuojWwLlrX6mde6Im0zX_HRZJytPCSr-GlG13vHAw4-fMdcIaiYXdU5gvcDvi0SyhB1GmYiir220X9IrFjc58xPIzyCxChWzltqvq-_eGq9-7LXknhFajV3psVDdmvBuAJ9aLcGQD3SkdHLDv9QR7KywzM4yzoXynwkUSUpRFo_ttmPvAQDL5QeszOk6YVuVwVkbL8ZhY_58G17JofxlTZYF6_Yh9jxrg7W-727vX0vt6Lipa8xD7qjk"/>
+</div>
+<span class="text-label-md font-label-md text-outline">Straps</span>
+<p class="font-label-lg text-on-surface truncate">Cognac Leather Band</p>
+<p class="font-label-md text-secondary mt-1">$45.00</p>
+</div>
+<!-- Related Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant/10 group cursor-pointer">
+<div class="aspect-square rounded-lg overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A sleek black minimalist wristwatch with a silver dial, professionally lit in a high-key modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnkvOKTakgSNpVzIv1GFjGFQyk-0_z-wnjpKnrd8VE-SxlKT_t15omTeXAr2YAf7zFz2YiB0FSaS8lMI7UfRAocAJ83WEYOCBS0aVVnbS4G0ZnHtjNeU_J9zUnC6KPe0ISjSfTujZuMxmwm66mLVTmh3L5IAYfAcbHd7aWxeUMmleFiNMiSMRYAYMNlO_IFNNYdh_L3UQRj9rtLhFMynP2XNdv1muPhCKWguNr5knRKs_r3w5alg0Xd3ZBJ0XL0CF0RfeGYL7ST6u1"/>
+</div>
+<span class="text-label-md font-label-md text-outline">Watches</span>
+<p class="font-label-lg text-on-surface truncate">Midnight Stealth</p>
+<p class="font-label-md text-secondary mt-1">$159.00</p>
+</div>
+<!-- Related Item 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant/10 group cursor-pointer">
+<div class="aspect-square rounded-lg overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High-end designer sunglasses with tortoiseshell frames on a clean, brightly lit surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRJYQgzoqrDC7J6ePSYsZ5UmVSFnijVE1fWJmD4qW91w93eEHAHrKfaHWL1mFORlCfl4dZu7BJp24nuFAwhh0mMGeyghk9E2f0IkTHqcNrB11IJMNbMN4xrwPd8uKG0RDamZqv3PG92mnZwXw8gBorO_uC5_tQwrqNanMiAvx2kM_QdJze3JzBwycxchzgclf47viPFSMF96Tt3HIubY3hfSpxZ-dOL16H7uB7tpe2pAeytUW7zX--aN4kUjwV-n_VeKMjHWKo_K5R"/>
+</div>
+<span class="text-label-md font-label-md text-outline">Eyewear</span>
+<p class="font-label-lg text-on-surface truncate">Aviator Modern</p>
+<p class="font-label-md text-secondary mt-1">$120.00</p>
+</div>
+<!-- Related Item 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm border border-outline-variant/10 group cursor-pointer">
+<div class="aspect-square rounded-lg overflow-hidden mb-4 bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A luxury travel case for watches made of black textured leather in a bright, modern setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoEU54OQUQ7Ien7uCFTlFqTQkaK9-yFug8bfitiwwLlgAJ_gw_ZlUpl3tNtqI8rJFQd59F8EI80OU6lAw3WepGRKuDf4ywfSQu3CPpRFgFavVoyV2nfr2cQ9YF3nvVZCgq836BeAkmyq8msBgqogsvR4mv1kKeXaAaBd6HhG_WUdfIsFuW43XRYJprpJAzT7rPiY_ITCYIyE_YxPnWrwA7l5MgpDMH5HX7SG_Us9Pj5zpdKrSFKc5eZNVrhFc9vDod48I-vzBjwSuS"/>
+</div>
+<span class="text-label-md font-label-md text-outline">Accessories</span>
+<p class="font-label-lg text-on-surface truncate">Travel Watch Case</p>
+<p class="font-label-md text-secondary mt-1">$85.00</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Mobile Bottom CTA Overlay (Mandatory for mobile per requirements) -->
+<div class="fixed bottom-0 left-0 w-full p-margin-mobile bg-surface-container-lowest shadow-[0_-4px_20px_rgba(0,0,0,0.08)] lg:hidden flex gap-4 z-[60]">
+<button class="flex-1 bg-secondary text-white py-4 rounded-xl font-label-lg shadow-lg active:scale-95 transition-all">
+            Add to Cart
+        </button>
+<button class="w-14 h-14 border-2 border-outline-variant rounded-xl flex items-center justify-center text-primary active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+<!-- BottomNavBar (Hidden on Detail Focused Screen but logic is kept if user wants to return to main destinations) -->
+<!-- SUPPRESSED for focused detail journey as per Shell Visibility rules for Transactional/Focused sub-pages -->
+<script>
+        // Micro-interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>

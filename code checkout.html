@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c5c5d3",
+                        "secondary-fixed-dim": "#ffb690",
+                        "on-primary-container": "#90a8ff",
+                        "tertiary": "#00312c",
+                        "on-secondary-fixed": "#341100",
+                        "primary-fixed": "#dce1ff",
+                        "primary-container": "#1e3a8a",
+                        "outline": "#757682",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary-container": "#4ebdb0",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#00164e",
+                        "on-error": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "primary": "#00236f",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-background": "#191c1e",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "background": "#f7f9fb",
+                        "surface-tint": "#4059aa",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#eff1f3",
+                        "inverse-primary": "#b6c4ff",
+                        "on-secondary-container": "#5c2400",
+                        "on-surface": "#191c1e",
+                        "tertiary-container": "#004942",
+                        "inverse-surface": "#2d3133",
+                        "secondary-fixed": "#ffdbca",
+                        "tertiary-fixed": "#89f5e7",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "secondary-container": "#fd761a",
+                        "on-surface-variant": "#444651",
+                        "on-primary-fixed-variant": "#264191",
+                        "error-container": "#ffdad6",
+                        "secondary": "#9d4300",
+                        "surface-container-high": "#e6e8ea",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#783200"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "12px",
+                        "stack-lg": "24px",
+                        "gutter": "16px",
+                        "stack-sm": "4px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active { color: var(--tw-color-secondary); }
+        .checkout-container { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; }
+        .hidden-step { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface dark:bg-surface-dim shadow-sm flex items-center justify-between px-margin-mobile py-base">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-variant/50 transition-colors p-2 rounded-full active:scale-95 duration-150">menu</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim tracking-tight">2friends</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim hover:bg-surface-variant/50 transition-colors p-2 rounded-full active:scale-95 duration-150">search</button>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+<!-- Stepper (Desktop) -->
+<nav class="hidden md:flex justify-center mb-stack-lg gap-8">
+<div class="flex items-center gap-2 text-secondary font-bold" id="step-nav-1">
+<span class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-label-lg">1</span>
+<span class="text-label-lg">Shopping Cart</span>
+</div>
+<div class="flex items-center gap-2 text-outline" id="step-nav-2">
+<span class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-label-lg border border-outline-variant">2</span>
+<span class="text-label-lg">Checkout Details</span>
+</div>
+<div class="flex items-center gap-2 text-outline" id="step-nav-3">
+<span class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-label-lg border border-outline-variant">3</span>
+<span class="text-label-lg">Confirmation</span>
+</div>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg">
+<!-- LEFT COLUMN: Cart Content / Forms -->
+<div class="lg:col-span-8 space-y-stack-lg">
+<!-- STEP 1: CART ITEMS -->
+<section class="checkout-container" id="step-1">
+<h2 class="font-headline-md text-headline-md mb-stack-md text-primary">Your Cart</h2>
+<div class="space-y-stack-md">
+<!-- Cart Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-gutter flex gap-4 items-center">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-variant">
+<img alt="Red Sneakers" class="w-full h-full object-cover" data-alt="A high-quality studio photograph of vibrant red performance running sneakers displayed against a clean, minimal white background. The lighting is soft and professional, highlighting the texture of the fabric and the sleek design. The overall aesthetic is modern, corporate, and trustworthy, perfectly fitting a premium e-commerce platform for active lifestyles." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgwUPlAjnB-g3UAELDovDr8zq2noCUfrWaGoq0S_WIPZVE13_Op-jrawlD9vQU_PRAhNYX1I5RemnV7C5xnyjfESMKzlyQErbVX6HYKic_SeGUhLcHSpSb2HNddUcOYLLd-gKOsgSdg45sFtFTLOBgkQyED3DiJoxd7sFRhpTXlM97LQbGjBEqsZqVjGzHQyJ25u1P_utjVOjGfMBNbE-9-FV_-fOUMcx-KQLAKlv8QeARtExeCuVbwzJEPNxBsyiPrEY2qvXhjres"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-label-lg text-label-lg text-on-surface">Pro Runner V2 - Crimson</h3>
+<button class="material-symbols-outlined text-outline hover:text-error transition-colors">delete</button>
+</div>
+<p class="text-body-sm text-on-surface-variant">Size: 42 • Color: Red</p>
+<div class="flex justify-between items-end mt-stack-md">
+<div class="flex items-center border border-outline-variant rounded-full overflow-hidden">
+<button class="px-3 py-1 hover:bg-surface-variant/30 text-primary active:scale-90 duration-150">-</button>
+<span class="px-3 py-1 font-label-lg">1</span>
+<button class="px-3 py-1 hover:bg-surface-variant/30 text-primary active:scale-90 duration-150">+</button>
+</div>
+<span class="font-headline-md text-primary">$129.00</span>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-gutter flex gap-4 items-center">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-variant">
+<img alt="Modern Smartwatch" class="w-full h-full object-cover" data-alt="A close-up, high-end product shot of a minimalist silver smartwatch with a clean white band. The device is set against a soft gray backdrop with subtle ambient lighting that creates gentle shadows. The image conveys precision and vibrancy, embodying a reliable corporate modern style for a premium community-driven tech marketplace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDctdu9cAc61ZavKubQq-YG53YD181crJYYl5XfFpnX5urBtJh-_p8tvrMGqetzLbHBz1JiKMzDLFi63Qn1XKdfAXF5R3M9w7y1s1MFVpJtx8GlPq_8wxWJ2JdvqB6eBVs5PgLpzKkQDEy-QYcXI_wEGe2WyxczPcQaJEXEiGKnKpEedttp4kBmE0pEN_ObKtoBzEosSkzJX2FvT5Q12wltxoE6kwcP58K5ZMLV8r_kIXOFfbwoGRNwp1cHctzIlDFs49CG7YQCSjSv"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-label-lg text-label-lg text-on-surface">CoreConnect Smartwatch</h3>
+<button class="material-symbols-outlined text-outline hover:text-error transition-colors">delete</button>
+</div>
+<p class="text-body-sm text-on-surface-variant">Model: Series S • Silver</p>
+<div class="flex justify-between items-end mt-stack-md">
+<div class="flex items-center border border-outline-variant rounded-full overflow-hidden">
+<button class="px-3 py-1 hover:bg-surface-variant/30 text-primary active:scale-90 duration-150">-</button>
+<span class="px-3 py-1 font-label-lg">1</span>
+<button class="px-3 py-1 hover:bg-surface-variant/30 text-primary active:scale-90 duration-150">+</button>
+</div>
+<span class="font-headline-md text-primary">$299.00</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- STEP 2: SHIPPING & PAYMENT -->
+<section class="checkout-container hidden-step" id="step-2">
+<h2 class="font-headline-md text-headline-md mb-stack-md text-primary">Checkout Details</h2>
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-gutter space-y-stack-lg">
+<!-- Shipping Address -->
+<div>
+<h3 class="font-label-lg text-label-lg mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">local_shipping</span>
+                                Shipping Address
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-label-md text-on-surface-variant px-1">Full Name</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md text-on-surface-variant px-1">Phone Number</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+<div class="md:col-span-2 space-y-1">
+<label class="text-label-md text-on-surface-variant px-1">Street Address</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="123 Modern Ave, Apt 4B" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md text-on-surface-variant px-1">City</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="San Francisco" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-label-md text-on-surface-variant px-1">Postal Code</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="94103" type="text"/>
+</div>
+</div>
+</div>
+<!-- Payment Method -->
+<div class="pt-stack-lg border-t border-surface-variant">
+<h3 class="font-label-lg text-label-lg mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">payments</span>
+                                Payment Method
+                            </h3>
+<div class="space-y-stack-md">
+<div class="flex items-center gap-4 p-4 rounded-lg border-2 border-primary bg-primary/5 cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary" name="payment" type="radio"/>
+<div class="flex-grow">
+<p class="font-label-lg">Credit or Debit Card</p>
+<p class="text-body-sm text-on-surface-variant">Visa, Mastercard, AMEX</p>
+</div>
+<div class="flex gap-1">
+<span class="material-symbols-outlined">credit_card</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-lg border border-outline-variant cursor-pointer hover:border-primary/50 transition-colors">
+<input class="text-primary focus:ring-primary" name="payment" type="radio"/>
+<div class="flex-grow">
+<p class="font-label-lg">Digital Wallet</p>
+<p class="text-body-sm text-on-surface-variant">Apple Pay, Google Pay, PayPal</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">account_balance_wallet</span>
+</div>
+</div>
+<div class="mt-4 space-y-4">
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Card Number" type="text"/>
+<div class="grid grid-cols-2 gap-4">
+<input class="px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="MM/YY" type="text"/>
+<input class="px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="CVC" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- STEP 3: CONFIRMATION -->
+<section class="checkout-container hidden-step" id="step-3">
+<div class="bg-surface-container-lowest rounded-xl shadow-lg p-10 text-center flex flex-col items-center justify-center">
+<div class="w-20 h-20 bg-tertiary-fixed-dim rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary text-4xl" data-weight="fill">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Order Confirmed!</h2>
+<p class="text-body-lg text-on-surface-variant max-w-md mx-auto mb-8">
+                            Thank you for shopping with 2friends. Your order <span class="font-bold">#TF-98432</span> has been placed successfully and will arrive within 3-5 business days.
+                        </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-bold hover:shadow-lg transition-all active:scale-95">Track My Order</button>
+<button class="bg-surface-container text-primary border border-outline-variant px-8 py-3 rounded-full font-bold hover:bg-surface-variant transition-all active:scale-95" onclick="location.reload()">Continue Shopping</button>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: Order Summary -->
+<aside class="lg:col-span-4" id="order-summary">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-gutter sticky top-24">
+<h3 class="font-headline-md text-headline-md mb-stack-md text-primary">Order Summary</h3>
+<div class="space-y-4 pb-stack-md border-b border-surface-variant">
+<div class="flex justify-between text-on-surface-variant">
+<span class="text-body-md">Subtotal</span>
+<span class="text-body-md font-bold">$428.00</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="text-body-md">Shipping</span>
+<span class="text-body-md font-bold text-tertiary-fixed-dim bg-tertiary-container/10 px-2 rounded">FREE</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="text-body-md">Tax (8%)</span>
+<span class="text-body-md font-bold">$34.24</span>
+</div>
+</div>
+<div class="pt-stack-md pb-stack-lg">
+<div class="flex justify-between items-center mb-6">
+<span class="font-headline-md text-primary">Total</span>
+<span class="font-headline-md text-primary">$462.24</span>
+</div>
+<!-- Action Buttons -->
+<div id="summary-actions">
+<button class="w-full bg-secondary text-on-secondary py-4 rounded-xl font-bold text-body-lg shadow-md hover:bg-secondary-container hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2" id="btn-next" onclick="nextStep()">
+<span id="btn-text">Proceed to Checkout</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="text-center text-body-sm text-outline mt-4">
+<span class="material-symbols-outlined text-[14px] align-middle">lock</span> Secure 256-bit SSL encrypted checkout
+                            </p>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="mt-4 pt-4 border-t border-surface-variant">
+<div class="flex gap-2">
+<input class="flex-grow px-3 py-2 rounded-lg border border-outline-variant focus:border-primary outline-none text-body-sm" placeholder="Promo code" type="text"/>
+<button class="bg-surface-container-high px-4 py-2 rounded-lg font-label-lg text-primary hover:bg-surface-variant">Apply</button>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-6 px-4 bg-surface-container-lowest dark:bg-surface-container-highest shadow-[0_-2px_10px_rgba(0,0,0,0.05)] rounded-t-xl">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-label-md text-label-md">Shop</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold active:scale-90 duration-200">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md">Cart</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</div>
+</nav>
+<script>
+        let currentStep = 1;
+
+        function nextStep() {
+            if (currentStep < 3) {
+                // Fade out current step
+                document.getElementById(`step-${currentStep}`).classList.add('opacity-0', '-translate-x-10');
+                
+                setTimeout(() => {
+                    document.getElementById(`step-${currentStep}`).classList.add('hidden-step');
+                    
+                    currentStep++;
+                    
+                    // Setup UI for new step
+                    const nextEl = document.getElementById(`step-${currentStep}`);
+                    nextEl.classList.remove('hidden-step');
+                    // Force reflow
+                    nextEl.offsetHeight;
+                    nextEl.classList.remove('opacity-0', '-translate-x-10');
+
+                    updateProgress();
+                }, 300);
+            }
+        }
+
+        function updateProgress() {
+            // Update desktop nav
+            for (let i = 1; i <= 3; i++) {
+                const navItem = document.getElementById(`step-nav-${i}`);
+                const circle = navItem.querySelector('span:first-child');
+                
+                if (i === currentStep) {
+                    navItem.classList.remove('text-outline');
+                    navItem.classList.add('text-secondary', 'font-bold');
+                    circle.classList.remove('bg-surface-container', 'border-outline-variant');
+                    circle.classList.add('bg-secondary', 'text-on-secondary');
+                } else if (i < currentStep) {
+                    navItem.classList.remove('text-outline', 'text-secondary');
+                    navItem.classList.add('text-tertiary-fixed-dim');
+                    circle.innerHTML = '<span class="material-symbols-outlined text-sm">check</span>';
+                    circle.classList.remove('bg-secondary');
+                    circle.classList.add('bg-tertiary-container', 'text-on-tertiary-container');
+                }
+            }
+
+            // Update main button text
+            const btnText = document.getElementById('btn-text');
+            const summary = document.getElementById('order-summary');
+            
+            if (currentStep === 2) {
+                btnText.innerText = "Place Order";
+            } else if (currentStep === 3) {
+                summary.style.display = 'none';
+            }
+        }
+    </script>
+</body></html>
