@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "outline-variant": "#c5c5d3",
+                  "secondary-fixed-dim": "#ffb690",
+                  "on-primary-container": "#90a8ff",
+                  "tertiary": "#00312c",
+                  "on-secondary-fixed": "#341100",
+                  "primary-fixed": "#dce1ff",
+                  "primary-container": "#1e3a8a",
+                  "outline": "#757682",
+                  "surface-dim": "#d8dadc",
+                  "on-tertiary-container": "#4ebdb0",
+                  "on-error-container": "#93000a",
+                  "on-primary-fixed": "#00164e",
+                  "on-error": "#ffffff",
+                  "surface-container": "#eceef0",
+                  "surface-container-lowest": "#ffffff",
+                  "surface-bright": "#f7f9fb",
+                  "primary": "#00236f",
+                  "surface-variant": "#e0e3e5",
+                  "surface-container-highest": "#e0e3e5",
+                  "on-background": "#191c1e",
+                  "on-tertiary-fixed": "#00201d",
+                  "on-primary": "#ffffff",
+                  "on-tertiary-fixed-variant": "#005049",
+                  "primary-fixed-dim": "#b6c4ff",
+                  "background": "#f7f9fb",
+                  "surface-tint": "#4059aa",
+                  "on-tertiary": "#ffffff",
+                  "error": "#ba1a1a",
+                  "inverse-on-surface": "#eff1f3",
+                  "inverse-primary": "#b6c4ff",
+                  "on-secondary-container": "#5c2400",
+                  "on-surface": "#191c1e",
+                  "tertiary-container": "#004942",
+                  "inverse-surface": "#2d3133",
+                  "secondary-fixed": "#ffdbca",
+                  "tertiary-fixed": "#89f5e7",
+                  "surface-container-low": "#f2f4f6",
+                  "surface": "#f7f9fb",
+                  "tertiary-fixed-dim": "#6bd8cb",
+                  "secondary-container": "#fd761a",
+                  "on-surface-variant": "#444651",
+                  "on-primary-fixed-variant": "#264191",
+                  "error-container": "#ffdad6",
+                  "secondary": "#9d4300",
+                  "surface-container-high": "#e6e8ea",
+                  "on-secondary": "#ffffff",
+                  "on-secondary-fixed-variant": "#783200"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "stack-md": "12px",
+                  "stack-lg": "24px",
+                  "gutter": "16px",
+                  "stack-sm": "4px",
+                  "margin-mobile": "20px",
+                  "base": "8px",
+                  "margin-desktop": "40px"
+          },
+          "fontFamily": {
+                  "body-lg": ["Inter"],
+                  "headline-lg-mobile": ["Inter"],
+                  "body-sm": ["Inter"],
+                  "headline-md": ["Inter"],
+                  "headline-lg": ["Inter"],
+                  "body-md": ["Inter"],
+                  "label-lg": ["Inter"],
+                  "label-md": ["Inter"]
+          },
+          "fontSize": {
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                  "headline-md": ["24px", {"lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                  "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+    @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(4, 1fr); gap: 32px; } }
+    .glass-effect { backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.85); }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface dark:bg-surface-dim shadow-sm">
+<div class="flex items-center justify-between px-margin-mobile py-base w-full">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim active:scale-95 duration-150 p-2 rounded-full hover:bg-surface-variant/50 transition-colors">menu</button>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed-dim tracking-tight">2friends</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim active:scale-95 duration-150 p-2 rounded-full hover:bg-surface-variant/50 transition-colors">search</button>
+</div>
+</div>
+</header>
+<main class="px-margin-mobile pt-stack-lg">
+<!-- Filter & Sort Header -->
+<section class="mb-stack-lg">
+<div class="flex items-center justify-between gap-4 overflow-x-auto no-scrollbar pb-2">
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full border border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+<span class="font-label-lg text-label-lg">Filters</span>
+</button>
+<div class="h-6 w-[1px] bg-outline-variant"></div>
+<div class="flex gap-2">
+<span class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg whitespace-nowrap">All Items</span>
+<span class="px-4 py-2 rounded-full bg-surface-variant/50 text-on-surface-variant font-label-lg text-label-lg whitespace-nowrap">Apparel</span>
+<span class="px-4 py-2 rounded-full bg-surface-variant/50 text-on-surface-variant font-label-lg text-label-lg whitespace-nowrap">Accessories</span>
+<span class="px-4 py-2 rounded-full bg-surface-variant/50 text-on-surface-variant font-label-lg text-label-lg whitespace-nowrap">Home</span>
+</div>
+</div>
+<button class="flex items-center gap-1 font-label-lg text-label-lg text-on-surface-variant whitespace-nowrap">
+<span>Sort by: Featured</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</section>
+<!-- Product Grid -->
+<section class="product-grid">
+<!-- Product Card 1 -->
+<div class="group relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A studio photograph of a premium minimalist wristwatch with a clean white face and a light brown leather strap. The watch is placed on a soft, light gray textured surface with gentle natural light coming from the side. The overall aesthetic is professional, modern, and high-end, utilizing a palette of soft whites and warm earthy tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRnjdBv6xGXSfZCN76ZEuddRTrnF-sUKPkObkhubH9Sin2WSHMGson0ugjtkyljIwHm6mm3KKgEficVjSOGNGFNeXAkCAxUSoDdQO7ls7SMrVUQ4Yi8obo7CNsETW4GyxJfT5Unbf57Pl-mgTunna_NyXbpJ6VoUXRhp7gfe0UPep22bxOfS7FewIvha2TmjHC_W7Wjwk2zPukhrNXaw-K2StpWryvrxTIO3_5JQipbV-TjN79_lVzgq3Q1x76bDUWPc4eilnSy9v6"/>
+<button class="absolute top-3 right-3 p-2 bg-white/80 glass-effect rounded-full shadow-sm material-symbols-outlined text-secondary active:scale-75 transition-all">favorite</button>
+<div class="absolute bottom-3 left-3 px-2 py-1 bg-secondary-container text-on-secondary-container rounded font-label-md text-label-md">New Arrival</div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-on-surface-variant font-label-md text-label-md mb-1 uppercase tracking-wider">Lifestyle</span>
+<h3 class="font-headline-md text-body-lg text-on-surface mb-1 group-hover:text-primary transition-colors line-clamp-1">Classic Horizon Watch</h3>
+<div class="flex items-center gap-1 mb-3">
+<span class="material-symbols-outlined text-secondary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.8</span>
+<span class="font-label-md text-label-md text-on-surface-variant">(124)</span>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-primary">$189.00</span>
+<button class="bg-secondary text-on-secondary p-2 rounded-lg active:scale-95 transition-all material-symbols-outlined">shopping_cart</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern high-fidelity wireless headphones in matte black finish, resting on a clean wooden desk. The background is a soft-focus minimalist office with warm ambient lighting. The style is sleek and corporate, focusing on the quality craftsmanship of the product, with deep blue and soft gray accents reflecting the 2friends brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQXhRzLSkeNeH_jDR_rekXfVJKsOFzhF1if5pla9CyKw3hE_2W7HnDeuVYJLLE2ftZ2ncpWtEAIrmp1gYx5GkbQKbugB4PuyuhaB_JqNNJ2AEYSndwID-FsMq6i1Pm-h8jUY_dCOK_xqKjh-v_Ii48xBQN03eHC9VzKagn8P7xRBYHg-sBFBy59gCGy6rEvLxvQq0xD-CKWA-RsKYZbZ1_D3q3SDiHwDq-nRFZ1j5xP3HSvcjPSzDYnXUxdXnzrucIlmWORbKA4rYV"/>
+<button class="absolute top-3 right-3 p-2 bg-white/80 glass-effect rounded-full shadow-sm material-symbols-outlined text-on-surface-variant active:scale-75 transition-all">favorite</button>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-on-surface-variant font-label-md text-label-md mb-1 uppercase tracking-wider">Tech</span>
+<h3 class="font-headline-md text-body-lg text-on-surface mb-1 group-hover:text-primary transition-colors line-clamp-1">Studio Wireless ANC</h3>
+<div class="flex items-center gap-1 mb-3">
+<span class="material-symbols-outlined text-secondary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.9</span>
+<span class="font-label-md text-label-md text-on-surface-variant">(2.1k)</span>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-primary">$299.00</span>
+<button class="bg-secondary text-on-secondary p-2 rounded-lg active:scale-95 transition-all material-symbols-outlined">shopping_cart</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A dynamic shot of a vibrant red performance running shoe against a neutral, high-contrast dark background. Crisp studio lighting highlights the texture of the breathable mesh and the aerodynamic curves of the sole. The image evokes a sense of energy and athletic reliability, fitting the brand's vibrant yet professional theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT3p-5Xwf8TaLfUoBUOthPeLsreRswA-PZX3nXUZy3XKp4bM2BZfnT9LevlXnK_wkI10lneLcEx_N6rXqYOnRmYAL17IUMTUJYWjmfcgjOTr4_aMA6o9awmB8HF8_9NXOT5oxLxHfQO_5Wc4gFa9Ri8dIRtd5lhcjNGyH8MszeZBc5esvvdl0D6p4aB4Y3TZgFJN-9rTU2THzimPoiMba8y71DchB5qMfvOTMheNfjOewqHXwXPvcR_r8txe3Nu2oAFI6lZm4NGqAI"/>
+<button class="absolute top-3 right-3 p-2 bg-white/80 glass-effect rounded-full shadow-sm material-symbols-outlined text-on-surface-variant active:scale-75 transition-all">favorite</button>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-on-surface-variant font-label-md text-label-md mb-1 uppercase tracking-wider">Footwear</span>
+<h3 class="font-headline-md text-body-lg text-on-surface mb-1 group-hover:text-primary transition-colors line-clamp-1">Velocity Run Trainer</h3>
+<div class="flex items-center gap-1 mb-3">
+<span class="material-symbols-outlined text-secondary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.7</span>
+<span class="font-label-md text-label-md text-on-surface-variant">(856)</span>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-primary">$145.00</span>
+<button class="bg-secondary text-on-secondary p-2 rounded-lg active:scale-95 transition-all material-symbols-outlined">shopping_cart</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A luxury structured leather handbag in a deep navy blue, displayed in an upscale boutique setting. Soft spotlighting creates elegant shadows and highlights the premium grain of the leather. The environment is clean and sophisticated with a corporate-modern aesthetic, maintaining a balance of trust and vibrant high-fashion appeal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9FUis2YwEQ9cNS8qfKV-rpNG_hk7ZkUjFVXOHlFnIZInFpvuD0BE6JWQlpDzksSCBgvro1Gl7dPukNF4VYKjj63vHVTjp1fZpieNKbYvfbFow76xPt2ZYtv-kkSs_KuRjJJB5HDM0dDhW5fuM3DmchCphNcvn65KGwoO8Sx-XAphDgkWl1BCW8EE3Mvwe5BZmIoa4qeH18ogszBRz9lG1y6vY6i3P5Unbv5Ha6pzL_MQXQkjgiLAIL-aXy9t2CkqpLqN3Hre3eZIF"/>
+<button class="absolute top-3 right-3 p-2 bg-white/80 glass-effect rounded-full shadow-sm material-symbols-outlined text-on-surface-variant active:scale-75 transition-all">favorite</button>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-on-surface-variant font-label-md text-label-md mb-1 uppercase tracking-wider">Accessories</span>
+<h3 class="font-headline-md text-body-lg text-on-surface mb-1 group-hover:text-primary transition-colors line-clamp-1">Executive Leather Tote</h3>
+<div class="flex items-center gap-1 mb-3">
+<span class="material-symbols-outlined text-secondary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.9</span>
+<span class="font-label-md text-label-md text-on-surface-variant">(42)</span>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-error line-through">$550.00</span>
+<span class="font-headline-md text-headline-md text-primary">$420.00</span>
+</div>
+<button class="bg-secondary text-on-secondary p-2 rounded-lg active:scale-95 transition-all material-symbols-outlined">shopping_cart</button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A vintage-style instant camera in a clean, modern white and gray color scheme. It sits on a bright, minimalist surface surrounded by soft, colorful polaroid photos. The lighting is bright and cheerful, reflecting a vibrant community-focused vibe while maintaining professional photographic clarity and sharp detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxIZ5fxeCqxTb9-FPsbxOvU8kY6JeXAn-03vs50U4sVUlY7P1iZyeul6Wsu9DXTwqZ-DnUU3svVHBTV_sFA8qZA4_ybZG19km1---v54nfKioP7yHWpyxkbCoIODpDMll-QwgzZgReatY7iQ38JoqQCcDfqveqyOEgjneFY5EcLdCYH3f-OodO1EhKi7-2fup9cWltiuxzqP3AqFC0oEBIizyl0yKjf4aOeaJLPVV4_mBMmN_P-0vxZ1aLj7zaPMoT-RfS02fYdEsj"/>
+<button class="absolute top-3 right-3 p-2 bg-white/80 glass-effect rounded-full shadow-sm material-symbols-outlined text-on-surface-variant active:scale-75 transition-all">favorite</button>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-on-surface-variant font-label-md text-label-md mb-1 uppercase tracking-wider">Lifestyle</span>
+<h3 class="font-headline-md text-body-lg text-on-surface mb-1 group-hover:text-primary transition-colors line-clamp-1">Retro Snap Camera</h3>
+<div class="flex items-center gap-1 mb-3">
+<span class="material-symbols-outlined text-secondary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.5</span>
+<span class="font-label-md text-label-md text-on-surface-variant">(310)</span>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-primary">$89.99</span>
+<button class="bg-secondary text-on-secondary p-2 rounded-lg active:scale-95 transition-all material-symbols-outlined">shopping_cart</button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group relative bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Premium designer sunglasses with gold frames and dark polarized lenses, set against a backdrop of clean white stone and tropical greenery. The lighting is bright and summery, creating sharp, sophisticated shadows. The aesthetic is upscale and modern, emphasizing the vibrancy and high-quality finish of the 2friends brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIdI6Z_D8L8bEDV21GUn7xb8rzL8I1UhtyLFj8bLTK3JUTGfWEFTVmLE55nWGyzQn8pCy7TaiHGxTFPGRiNoHqQt22wAp5PR1P_6edCRZToIBQASL6wsl_FIQEbj6GPrnZx0Qhdh-_sr1lt0EU6QRwqyNbPHz4WKbQfTBLiY301gE5kPw6SuaBV_yUj41v4oxwESk-tUatEtfuEYQ1PZx0ncc9llGp-KtztkpNovXPMR-4NT9UqkR5bOz9HGs_yLYISfJYulkMFptd"/>
+<button class="absolute top-3 right-3 p-2 bg-white/80 glass-effect rounded-full shadow-sm material-symbols-outlined text-on-surface-variant active:scale-75 transition-all">favorite</button>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<span class="text-on-surface-variant font-label-md text-label-md mb-1 uppercase tracking-wider">Accessories</span>
+<h3 class="font-headline-md text-body-lg text-on-surface mb-1 group-hover:text-primary transition-colors line-clamp-1">Golden Wayfarer</h3>
+<div class="flex items-center gap-1 mb-3">
+<span class="material-symbols-outlined text-secondary text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface">4.8</span>
+<span class="font-label-md text-label-md text-on-surface-variant">(189)</span>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-primary">$210.00</span>
+<button class="bg-secondary text-on-secondary p-2 rounded-lg active:scale-95 transition-all material-symbols-outlined">shopping_cart</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Empty State / Load More -->
+<div class="py-stack-lg flex flex-col items-center justify-center gap-4">
+<div class="w-12 h-12 rounded-full border-4 border-primary border-t-transparent animate-spin"></div>
+<p class="font-body-md text-body-md text-on-surface-variant">Finding more awesome products for you...</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-6 px-4 bg-surface-container-lowest dark:bg-surface-container-highest shadow-[0_-2px_10px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="font-label-md text-label-md">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-all active:scale-90 duration-200 relative" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md">Cart</span>
+<span class="absolute -top-1 -right-1 bg-secondary text-on-secondary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">3</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-secondary transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+    // Micro-interactions
+    document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+      icon.addEventListener('click', function() {
+        if (this.innerText === 'favorite') {
+          const isFilled = this.style.fontVariationSettings.includes("'FILL' 1");
+          this.style.fontVariationSettings = isFilled ? "'FILL' 0" : "'FILL' 1";
+          this.classList.toggle('text-secondary', !isFilled);
+        }
+      });
+    });
+
+    // Handle scroll for navbar elevation
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 10) {
+        header.classList.add('shadow-md');
+        header.classList.remove('shadow-sm');
+      } else {
+        header.classList.add('shadow-sm');
+        header.classList.remove('shadow-md');
+      }
+    });
+  </script>
+</body></html>
