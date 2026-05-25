@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import type { MouseEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { Product } from '../data/products'
@@ -13,8 +12,8 @@ type ProductCardProps = {
 
 export function ProductCard({ product, variant = 'compact' }: ProductCardProps) {
   const navigate = useNavigate()
-  const { addItem } = useCart()
-  const [liked, setLiked] = useState(false)
+  const { addItem, isWishlisted, toggleWishlist } = useCart()
+  const liked = isWishlisted(product.id)
 
   const openProduct = () => {
     navigate(`/product/${product.id}`)
@@ -37,14 +36,15 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
           />
+
           <button
             type="button"
             onClick={(e) => {
               stopCardClick(e)
-              setLiked(!liked)
+              toggleWishlist(product)
             }}
-            className="absolute top-3 right-3 rounded-full bg-white/80 p-2 shadow-sm backdrop-blur active:scale-75"
-            aria-label={liked ? 'Remove from favorites' : 'Add to favorites'}
+            className="absolute top-3 right-3 rounded-full bg-white/85 p-2 shadow-sm backdrop-blur active:scale-75"
+            aria-label={liked ? 'Remove from wishlist' : 'Add to wishlist'}
           >
             <Icon
               name="favorite"
@@ -52,6 +52,7 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
               className={liked ? 'text-error' : 'text-on-surface-variant'}
             />
           </button>
+
           {product.badge && (
             <span className="absolute bottom-3 left-3 rounded bg-secondary-container px-2 py-1 text-xs font-medium text-on-secondary-container">
               {product.badge}
@@ -63,9 +64,11 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
           <span className="mb-1 text-xs font-medium tracking-wider text-on-surface-variant uppercase">
             {product.category}
           </span>
+
           <h3 className="mb-1 line-clamp-1 text-lg font-semibold text-on-surface group-hover:text-primary">
             {product.name}
           </h3>
+
           <div className="mb-3 flex items-center gap-1">
             <Icon name="star" filled className="text-base text-secondary" />
             <span className="text-sm font-semibold">{product.rating}</span>
@@ -73,6 +76,7 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
               ({formatReviews(product.reviews)})
             </span>
           </div>
+
           <div className="mt-auto flex items-center justify-between">
             <div>
               {product.originalPrice && (
@@ -80,10 +84,12 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
                   {formatPrice(product.originalPrice)}
                 </span>
               )}
+
               <span className="text-xl font-semibold text-primary">
                 {formatPrice(product.price)}
               </span>
             </div>
+
             <button
               type="button"
               onClick={(e) => {
@@ -113,14 +119,15 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
+
         <button
           type="button"
           onClick={(e) => {
             stopCardClick(e)
-            setLiked(!liked)
+            toggleWishlist(product)
           }}
-          className="absolute top-2 right-2 rounded-full bg-white/80 p-2 backdrop-blur active:scale-90"
-          aria-label={liked ? 'Remove from favorites' : 'Add to favorites'}
+          className="absolute top-2 right-2 rounded-full bg-white/85 p-2 backdrop-blur active:scale-90"
+          aria-label={liked ? 'Remove from wishlist' : 'Add to wishlist'}
         >
           <Icon
             name="favorite"
@@ -134,13 +141,18 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
         <h4 className="line-clamp-1 text-sm font-semibold text-on-surface">
           {product.name}
         </h4>
+
         {product.subtitle && (
-          <p className="mt-1 text-sm text-on-surface-variant">{product.subtitle}</p>
+          <p className="mt-1 text-sm text-on-surface-variant">
+            {product.subtitle}
+          </p>
         )}
+
         <div className="mt-auto flex items-center justify-between pt-stack-md">
           <span className="text-xl font-semibold text-primary">
             {formatPrice(product.price)}
           </span>
+
           <button
             type="button"
             onClick={(e) => {

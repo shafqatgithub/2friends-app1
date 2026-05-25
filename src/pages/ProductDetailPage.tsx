@@ -7,7 +7,7 @@ import { formatPrice, formatReviews, products } from '../data/products'
 export function ProductDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { addItem } = useCart()
+  const { addItem, isWishlisted, toggleWishlist } = useCart()
 
   const product = useMemo(() => {
     return products.find((p) => p.id === id)
@@ -17,9 +17,7 @@ export function ProductDetailPage() {
     return (
       <div className="flex min-h-[70dvh] items-center justify-center px-6 text-center">
         <div>
-          <h2 className="mb-2 text-2xl font-bold">
-            Product not found
-          </h2>
+          <h2 className="mb-2 text-2xl font-bold">Product not found</h2>
 
           <button
             type="button"
@@ -33,8 +31,10 @@ export function ProductDetailPage() {
     )
   }
 
+  const liked = isWishlisted(product.id)
+
   return (
-    <section className="w-full px-margin-mobile py-stack-lg">
+    <section className="w-full px-margin-mobile py-stack-lg pb-28">
       <div className="overflow-hidden rounded-3xl bg-surface-container-lowest shadow-sm">
         <div className="aspect-square overflow-hidden bg-surface-container">
           <img
@@ -52,29 +52,25 @@ export function ProductDetailPage() {
 
             <button
               type="button"
-              className="rounded-full bg-surface-container p-3"
+              onClick={() => toggleWishlist(product)}
+              className="rounded-full bg-surface-container p-3 active:scale-95"
+              aria-label={liked ? 'Remove from wishlist' : 'Add to wishlist'}
             >
-              <Icon name="favorite" />
+              <Icon
+                name="favorite"
+                filled={liked}
+                className={liked ? 'text-error' : 'text-primary'}
+              />
             </button>
           </div>
 
           {product.subtitle && (
-            <p className="mb-4 text-on-surface-variant">
-              {product.subtitle}
-            </p>
+            <p className="mb-4 text-on-surface-variant">{product.subtitle}</p>
           )}
 
           <div className="mb-5 flex items-center gap-2">
-            <Icon
-              name="star"
-              filled
-              className="text-secondary"
-            />
-
-            <span className="font-semibold">
-              {product.rating}
-            </span>
-
+            <Icon name="star" filled className="text-secondary" />
+            <span className="font-semibold">{product.rating}</span>
             <span className="text-sm text-on-surface-variant">
               ({formatReviews(product.reviews)} reviews)
             </span>
@@ -93,14 +89,12 @@ export function ProductDetailPage() {
           </div>
 
           <div className="mb-6 rounded-2xl bg-surface-container p-4">
-            <h3 className="mb-2 text-lg font-semibold">
-              Product Details
-            </h3>
+            <h3 className="mb-2 text-lg font-semibold">Product Details</h3>
 
             <p className="text-on-surface-variant">
-              Premium 2Friends product designed for daily use,
-              comfort, and style. High quality materials with
-              modern aesthetic and durable performance.
+              Premium 2Friends product designed for daily use, comfort, and
+              style. High quality materials with modern aesthetic and durable
+              performance.
             </p>
           </div>
 

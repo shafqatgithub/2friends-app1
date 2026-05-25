@@ -23,7 +23,13 @@ type MenuItem = LinkMenuItem | ActionMenuItem
 
 export function ProfilePage() {
   const { user, logout, isDemoMode } = useAuth()
-  const { itemCount, subtotal } = useCart()
+
+  const {
+    itemCount,
+    subtotal,
+    wishlistCount,
+  } = useCart()
+
   const [helpOpen, setHelpOpen] = useState(false)
 
   if (!user) {
@@ -31,9 +37,27 @@ export function ProfilePage() {
   }
 
   const menuItems: MenuItem[] = [
-    { type: 'link', icon: 'receipt_long', label: 'Order History', to: '/checkout' },
-    { type: 'link', icon: 'favorite', label: 'Wishlist', to: '/shop' },
-    { type: 'link', icon: 'settings', label: 'Settings', to: '/shop' },
+    {
+      type: 'link',
+      icon: 'receipt_long',
+      label: 'Order History',
+      to: '/checkout',
+    },
+
+    {
+      type: 'link',
+      icon: 'favorite',
+      label: 'Wishlist',
+      to: '/wishlist',
+    },
+
+    {
+      type: 'link',
+      icon: 'settings',
+      label: 'Settings',
+      to: '/settings',
+    },
+
     {
       type: 'action',
       icon: 'support_agent',
@@ -52,8 +76,13 @@ export function ProfilePage() {
             </div>
 
             <div className="min-w-0">
-              <h2 className="truncate text-xl font-bold">Hello, {user.name}</h2>
-              <p className="truncate text-sm opacity-80">{user.email}</p>
+              <h2 className="truncate text-xl font-bold">
+                Hello, {user.name}
+              </h2>
+
+              <p className="truncate text-sm opacity-80">
+                {user.email}
+              </p>
 
               {isDemoMode ? (
                 <span className="mt-2 inline-block rounded-full bg-secondary/20 px-3 py-1 text-xs">
@@ -78,19 +107,50 @@ export function ProfilePage() {
         </div>
       </div>
 
-      <div className="mt-stack-lg grid grid-cols-2 gap-gutter">
-        <div className="rounded-2xl bg-surface-container-lowest p-4 shadow-sm">
-          <Icon name="shopping_cart" className="text-primary" />
-          <p className="mt-2 text-2xl font-bold text-primary">{itemCount}</p>
-          <p className="text-sm text-on-surface-variant">Cart items</p>
+      <div className="mt-stack-lg grid grid-cols-3 gap-gutter">
+        <div className="rounded-2xl bg-surface-container-lowest p-4 text-center shadow-sm">
+          <Icon
+            name="shopping_cart"
+            className="mx-auto text-primary"
+          />
+
+          <p className="mt-2 text-2xl font-bold text-primary">
+            {itemCount}
+          </p>
+
+          <p className="text-xs text-on-surface-variant">
+            Cart
+          </p>
         </div>
 
-        <div className="rounded-2xl bg-surface-container-lowest p-4 shadow-sm">
-          <Icon name="payments" className="text-secondary" />
+        <div className="rounded-2xl bg-surface-container-lowest p-4 text-center shadow-sm">
+          <Icon
+            name="favorite"
+            className="mx-auto text-error"
+          />
+
           <p className="mt-2 text-2xl font-bold text-primary">
+            {wishlistCount}
+          </p>
+
+          <p className="text-xs text-on-surface-variant">
+            Wishlist
+          </p>
+        </div>
+
+        <div className="rounded-2xl bg-surface-container-lowest p-4 text-center shadow-sm">
+          <Icon
+            name="payments"
+            className="mx-auto text-secondary"
+          />
+
+          <p className="mt-2 text-xl font-bold text-primary">
             {formatPrice(subtotal)}
           </p>
-          <p className="text-sm text-on-surface-variant">Cart value</p>
+
+          <p className="text-xs text-on-surface-variant">
+            Cart Value
+          </p>
         </div>
       </div>
 
@@ -103,10 +163,18 @@ export function ProfilePage() {
                 className="flex items-center justify-between rounded-2xl bg-surface-container-lowest px-4 py-4 shadow-sm active:scale-[0.99]"
               >
                 <span className="flex items-center gap-3 font-medium">
-                  <Icon name={item.icon} className="text-primary" />
+                  <Icon
+                    name={item.icon}
+                    className="text-primary"
+                  />
+
                   {item.label}
                 </span>
-                <Icon name="chevron_right" className="text-outline" />
+
+                <Icon
+                  name="chevron_right"
+                  className="text-outline"
+                />
               </Link>
             ) : (
               <button
@@ -115,10 +183,18 @@ export function ProfilePage() {
                 className="flex w-full items-center justify-between rounded-2xl bg-surface-container-lowest px-4 py-4 text-left shadow-sm active:scale-[0.99]"
               >
                 <span className="flex items-center gap-3 font-medium">
-                  <Icon name={item.icon} className="text-primary" />
+                  <Icon
+                    name={item.icon}
+                    className="text-primary"
+                  />
+
                   {item.label}
                 </span>
-                <Icon name="chevron_right" className="text-outline" />
+
+                <Icon
+                  name="chevron_right"
+                  className="text-outline"
+                />
               </button>
             )}
           </li>
@@ -137,7 +213,10 @@ export function ProfilePage() {
         <div className="fixed inset-0 z-[10000] flex items-end bg-black/40 px-margin-mobile pb-6">
           <div className="w-full rounded-3xl bg-white p-5 shadow-xl">
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-primary">Help & Support</h3>
+              <h3 className="text-xl font-bold text-primary">
+                Help & Support
+              </h3>
+
               <button
                 type="button"
                 onClick={() => setHelpOpen(false)}
@@ -148,8 +227,9 @@ export function ProfilePage() {
             </div>
 
             <p className="text-sm leading-6 text-on-surface-variant">
-              Need help with orders, payments, account, or products? Contact 2Friends
-              support and we will help you as soon as possible.
+              Need help with orders, payments, account,
+              or products? Contact 2Friends support and
+              we will help you as soon as possible.
             </p>
 
             <div className="mt-4 grid gap-3">

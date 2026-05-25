@@ -10,11 +10,24 @@ type Step = 1 | 2 | 3
 
 export function CheckoutPage() {
   const navigate = useNavigate()
+
   const { user } = useAuth()
-  const { items, subtotal, updateQuantity, removeItem, clearCart, itemCount } = useCart()
+
+  const {
+    items,
+    subtotal,
+    updateQuantity,
+    removeItem,
+    clearCart,
+    itemCount,
+  } = useCart()
+
   const [step, setStep] = useState<Step>(1)
+
   const [placing, setPlacing] = useState(false)
+
   const [orderError, setOrderError] = useState<string | null>(null)
+
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -40,9 +53,19 @@ export function CheckoutPage() {
   if (itemCount === 0 && step !== 3) {
     return (
       <main className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-margin-mobile text-center">
-        <Icon name="shopping_cart" className="text-6xl text-outline" />
-        <h2 className="text-2xl font-semibold text-primary">Your cart is empty</h2>
-        <p className="text-on-surface-variant">Add items from the shop to checkout.</p>
+        <Icon
+          name="shopping_cart"
+          className="text-6xl text-outline"
+        />
+
+        <h2 className="text-2xl font-semibold text-primary">
+          Your cart is empty
+        </h2>
+
+        <p className="text-on-surface-variant">
+          Add items from the shop to checkout.
+        </p>
+
         <Link
           to="/shop"
           className="rounded-full bg-secondary px-8 py-3 font-bold text-white active:scale-95"
@@ -54,7 +77,7 @@ export function CheckoutPage() {
   }
 
   return (
-    <main className="mx-auto max-w-7xl px-margin-mobile py-stack-lg">
+    <main className="mx-auto max-w-7xl px-margin-mobile py-stack-lg pb-28">
       <nav className="mb-stack-lg hidden justify-center gap-8 md:flex">
         {[
           { n: 1, label: 'Shopping Cart' },
@@ -63,7 +86,11 @@ export function CheckoutPage() {
         ].map(({ n, label }) => (
           <div
             key={n}
-            className={`flex items-center gap-2 ${step >= n ? 'font-bold text-secondary' : 'text-outline'}`}
+            className={`flex items-center gap-2 ${
+              step >= n
+                ? 'font-bold text-secondary'
+                : 'text-outline'
+            }`}
           >
             <span
               className={`flex h-8 w-8 items-center justify-center rounded-full text-sm ${
@@ -74,6 +101,7 @@ export function CheckoutPage() {
             >
               {n}
             </span>
+
             <span className="text-sm">{label}</span>
           </div>
         ))}
@@ -81,47 +109,72 @@ export function CheckoutPage() {
 
       {step === 1 && (
         <section className="space-y-stack-lg">
-          <h2 className="text-2xl font-semibold text-primary">Your Cart</h2>
+          <h2 className="text-2xl font-semibold text-primary">
+            Your Cart
+          </h2>
+
           <div className="space-y-stack-md">
             {items.map(({ product, quantity }) => (
               <div
                 key={product.id}
-                className="flex gap-gutter rounded-xl border border-outline-variant/40 bg-surface-container-lowest p-4 shadow-sm"
+                onClick={() => navigate(`/product/${product.id}`)}
+                className="flex cursor-pointer gap-gutter rounded-xl border border-outline-variant/40 bg-surface-container-lowest p-4 shadow-sm transition-all active:scale-[0.99]"
               >
                 <img
                   src={product.image}
                   alt={product.name}
                   className="h-24 w-24 flex-shrink-0 rounded-lg object-cover"
                 />
+
                 <div className="flex flex-grow flex-col">
-                  <h3 className="font-semibold text-on-surface">{product.name}</h3>
-                  <p className="text-sm text-on-surface-variant">{product.category}</p>
+                  <h3 className="font-semibold text-on-surface">
+                    {product.name}
+                  </h3>
+
+                  <p className="text-sm text-on-surface-variant">
+                    {product.category}
+                  </p>
+
                   <p className="mt-auto text-lg font-semibold text-primary">
                     {formatPrice(product.price)}
                   </p>
+
                   <div className="mt-2 flex items-center justify-between">
-                    <div className="flex items-center gap-2 rounded-lg border border-outline-variant">
+                    <div
+                      className="flex items-center gap-2 rounded-lg border border-outline-variant"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <button
                         type="button"
-                        onClick={() => updateQuantity(product.id, quantity - 1)}
+                        onClick={() =>
+                          updateQuantity(product.id, quantity - 1)
+                        }
                         className="px-2 py-1 text-primary"
-                        aria-label="Decrease quantity"
                       >
                         <Icon name="remove" />
                       </button>
-                      <span className="min-w-[2ch] text-center font-semibold">{quantity}</span>
+
+                      <span className="min-w-[2ch] text-center font-semibold">
+                        {quantity}
+                      </span>
+
                       <button
                         type="button"
-                        onClick={() => updateQuantity(product.id, quantity + 1)}
+                        onClick={() =>
+                          updateQuantity(product.id, quantity + 1)
+                        }
                         className="px-2 py-1 text-primary"
-                        aria-label="Increase quantity"
                       >
                         <Icon name="add" />
                       </button>
                     </div>
+
                     <button
                       type="button"
-                      onClick={() => removeItem(product.id)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        removeItem(product.id)
+                      }}
                       className="text-sm text-error hover:underline"
                     >
                       Remove
@@ -138,19 +191,23 @@ export function CheckoutPage() {
                 <span>Subtotal</span>
                 <span>{formatPrice(subtotal)}</span>
               </div>
+
               <div className="flex justify-between">
                 <span>Shipping</span>
                 <span>{formatPrice(shipping)}</span>
               </div>
+
               <div className="flex justify-between">
                 <span>Tax</span>
                 <span>{formatPrice(tax)}</span>
               </div>
+
               <div className="flex justify-between border-t border-outline-variant pt-2 text-lg font-bold text-primary">
                 <span>Total</span>
                 <span>{formatPrice(total)}</span>
               </div>
             </div>
+
             <button
               type="button"
               onClick={() => setStep(2)}
@@ -164,18 +221,24 @@ export function CheckoutPage() {
 
       {step === 2 && (
         <section className="mx-auto max-w-lg space-y-stack-lg">
-          <h2 className="text-2xl font-semibold text-primary">Checkout Details</h2>
+          <h2 className="text-2xl font-semibold text-primary">
+            Checkout Details
+          </h2>
+
           {orderError && (
             <p className="rounded-lg border border-error/30 bg-error/10 px-4 py-3 text-sm text-error">
               {orderError}
             </p>
           )}
+
           <form
             className="space-y-stack-md rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-margin-mobile shadow-lg"
             onSubmit={async (e) => {
               e.preventDefault()
+
               setOrderError(null)
               setPlacing(true)
+
               try {
                 await placeOrder({
                   userId: user?.id,
@@ -189,19 +252,48 @@ export function CheckoutPage() {
                   tax,
                   total,
                 })
+
                 setStep(3)
               } catch (err) {
-                setOrderError(err instanceof Error ? err.message : 'Could not place order')
+                setOrderError(
+                  err instanceof Error
+                    ? err.message
+                    : 'Could not place order',
+                )
               } finally {
                 setPlacing(false)
               }
             }}
           >
             {[
-              { key: 'name', label: 'Full Name', type: 'text', placeholder: 'Alex Smith' },
-              { key: 'email', label: 'Email', type: 'email', placeholder: 'alex@example.com' },
-              { key: 'address', label: 'Address', type: 'text', placeholder: '123 Main St' },
-              { key: 'city', label: 'City', type: 'text', placeholder: 'New York' },
+              {
+                key: 'name',
+                label: 'Full Name',
+                type: 'text',
+                placeholder: 'Alex Smith',
+              },
+
+              {
+                key: 'email',
+                label: 'Email',
+                type: 'email',
+                placeholder: 'alex@example.com',
+              },
+
+              {
+                key: 'address',
+                label: 'Address',
+                type: 'text',
+                placeholder: '123 Main St',
+              },
+
+              {
+                key: 'city',
+                label: 'City',
+                type: 'text',
+                placeholder: 'New York',
+              },
+
               {
                 key: 'card',
                 label: 'Card Number',
@@ -213,16 +305,23 @@ export function CheckoutPage() {
                 <label className="mb-1 ml-1 block text-sm font-semibold text-on-surface-variant">
                   {label}
                 </label>
+
                 <input
                   required
                   type={type}
                   placeholder={placeholder}
                   value={form[key as keyof typeof form]}
-                  onChange={(e) => setForm({ ...form, [key]: e.target.value })}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      [key]: e.target.value,
+                    })
+                  }
                   className="w-full rounded-lg border border-outline-variant bg-surface px-4 py-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                 />
               </div>
             ))}
+
             <div className="flex gap-2 pt-2">
               <button
                 type="button"
@@ -231,6 +330,7 @@ export function CheckoutPage() {
               >
                 Back
               </button>
+
               <button
                 type="submit"
                 disabled={placing}
@@ -246,13 +346,29 @@ export function CheckoutPage() {
       {step === 3 && (
         <section className="flex flex-col items-center py-stack-lg text-center">
           <div className="mb-stack-md flex h-20 w-20 items-center justify-center rounded-full bg-secondary-fixed/50">
-            <Icon name="check_circle" filled className="text-5xl text-secondary" />
+            <Icon
+              name="check_circle"
+              filled
+              className="text-5xl text-secondary"
+            />
           </div>
-          <h2 className="text-2xl font-semibold text-primary">Order Confirmed!</h2>
+
+          <h2 className="text-2xl font-semibold text-primary">
+            Order Confirmed!
+          </h2>
+
           <p className="mt-2 max-w-sm text-on-surface-variant">
-            Thank you{form.name ? `, ${form.name.split(' ')[0]}` : ''}! Your order is on its way.
+            Thank you
+            {form.name
+              ? `, ${form.name.split(' ')[0]}`
+              : ''}
+            ! Your order is on its way.
           </p>
-          <p className="mt-4 text-lg font-bold text-secondary">{formatPrice(total)}</p>
+
+          <p className="mt-4 text-lg font-bold text-secondary">
+            {formatPrice(total)}
+          </p>
+
           <div className="mt-stack-lg flex flex-col gap-2 sm:flex-row">
             <button
               type="button"
@@ -264,6 +380,7 @@ export function CheckoutPage() {
             >
               Continue Shopping
             </button>
+
             <Link
               to="/"
               className="rounded-full border border-outline-variant px-8 py-3 font-semibold"

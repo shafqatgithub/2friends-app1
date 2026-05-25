@@ -8,6 +8,8 @@ import { LoginPage } from './pages/LoginPage'
 import { ProductDetailPage } from './pages/ProductDetailPage'
 import { ProductsPage } from './pages/ProductsPage'
 import { ProfilePage } from './pages/ProfilePage'
+import { SettingsPage } from './pages/SettingsPage'
+import { WishlistPage } from './pages/WishlistPage'
 
 export default function App() {
   return (
@@ -20,31 +22,20 @@ export default function App() {
             <Route element={<AppLayout />}>
               <Route index element={<HomePage />} />
 
-              <Route
-                path="shop"
-                element={<ProductsPage />}
-              />
+              <Route path="shop" element={<ProductsPage />} />
 
-              <Route
-                path="product/:id"
-                element={<ProductDetailPage />}
-              />
+              <Route path="product/:id" element={<ProductDetailPage />} />
 
-              <Route
-                path="checkout"
-                element={<CheckoutPage />}
-              />
+              <Route path="checkout" element={<CheckoutPage />} />
 
-              <Route
-                path="profile"
-                element={<ProfilePage />}
-              />
+              <Route path="profile" element={<ProfilePage />} />
+
+              <Route path="wishlist" element={<WishlistPage />} />
+
+              <Route path="settings" element={<SettingsPage />} />
             </Route>
 
-            <Route
-              path="*"
-              element={<Navigate to="/" replace />}
-            />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </CartProvider>
       </AuthProvider>
