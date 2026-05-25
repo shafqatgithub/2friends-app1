@@ -1,32 +1,77 @@
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ProductCard } from '../components/ProductCard'
 import { Icon } from '../components/Icon'
-import { categories, featuredProducts, HERO_IMAGE } from '../data/products'
+import { categories, featuredProducts, products } from '../data/products'
 
 export function HomePage() {
+  const heroProducts = useMemo(() => products.slice(0, 5), [])
+  const [activeHero, setActiveHero] = useState(0)
+  const [communityEmail, setCommunityEmail] = useState('')
+  const [joined, setJoined] = useState(false)
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveHero((prev) => (prev + 1) % heroProducts.length)
+    }, 3000)
+
+    return () => window.clearInterval(timer)
+  }, [heroProducts.length])
+
+  const heroProduct = heroProducts[activeHero]
+
   return (
-    <main className="mx-auto max-w-screen-xl">
+    <main className="mx-auto max-w-screen-xl pb-6">
       <section className="mt-gutter px-margin-mobile">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-primary-container text-white">
-          <img
-            src={HERO_IMAGE}
-            alt="New arrivals collection"
-            className="absolute inset-0 h-full w-full object-cover opacity-80 mix-blend-overlay"
-          />
-          <div className="absolute inset-0 flex flex-col justify-center bg-gradient-to-r from-primary/80 to-transparent p-gutter">
-            <span className="text-sm font-semibold tracking-widest text-secondary-fixed uppercase">
-              Special Offer
+        <div className="relative min-h-[230px] overflow-hidden rounded-3xl bg-primary-container text-white shadow-lg">
+          {heroProducts.map((product, index) => (
+            <img
+              key={product.id}
+              src={product.image}
+              alt={product.name}
+              className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ${
+                index === activeHero
+                  ? 'scale-100 opacity-80'
+                  : 'scale-105 opacity-0'
+              }`}
+            />
+          ))}
+
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/70 to-primary/10" />
+
+          <div className="relative z-10 flex min-h-[230px] flex-col justify-center px-5 py-6">
+            <span className="text-xs font-semibold tracking-widest text-secondary-fixed uppercase">
+              New Arrival
             </span>
-            <h2 className="mt-2 text-[26px] leading-8 font-bold">New Arrivals</h2>
-            <p className="mt-stack-md max-w-xs text-base text-on-primary-container opacity-90">
-              Discover our latest collection of essentials designed for your vibrant lifestyle.
+
+            <h2 className="mt-2 max-w-[240px] text-[27px] leading-8 font-bold">
+              {heroProduct?.name || 'New Arrivals'}
+            </h2>
+
+            <p className="mt-3 max-w-[250px] text-sm leading-5 text-white/90">
+              Discover premium 2Friends products made for your daily lifestyle.
             </p>
+
             <Link
               to="/shop"
-              className="mt-stack-lg w-fit rounded-full bg-secondary px-8 py-3 font-bold text-white shadow-lg transition-all hover:opacity-90 active:scale-95"
+              className="mt-5 w-fit rounded-full bg-secondary px-7 py-3 text-sm font-bold text-white shadow-lg transition-all active:scale-95"
             >
               Shop Now
             </Link>
+
+            <div className="mt-5 flex gap-2">
+              {heroProducts.map((product, index) => (
+                <button
+                  key={product.id}
+                  type="button"
+                  onClick={() => setActiveHero(index)}
+                  className={`h-2 rounded-full transition-all ${
+                    index === activeHero ? 'w-7 bg-white' : 'w-2 bg-white/40'
+                  }`}
+                  aria-label={`Show ${product.name}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -38,7 +83,8 @@ export function HomePage() {
             View All
           </Link>
         </div>
-        <div className="no-scrollbar flex gap-gutter overflow-x-auto px-margin-mobile">
+
+        <div className="no-scrollbar flex gap-gutter overflow-x-auto px-margin-mobile pb-1">
           {categories.map((cat) => (
             <Link
               key={cat.id}
@@ -48,14 +94,19 @@ export function HomePage() {
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-surface-container-high text-primary shadow-sm">
                 <Icon name={cat.icon} className="text-3xl" />
               </div>
-              <span className="text-xs font-medium text-on-surface-variant">{cat.label}</span>
+              <span className="text-xs font-medium text-on-surface-variant">
+                {cat.label}
+              </span>
             </Link>
           ))}
         </div>
       </section>
 
       <section className="mt-stack-lg px-margin-mobile">
-        <h3 className="mb-stack-md text-2xl font-semibold text-on-surface">Featured Products</h3>
+        <h3 className="mb-stack-md text-2xl font-semibold text-on-surface">
+          Featured Products
+        </h3>
+
         <div className="grid grid-cols-2 gap-gutter lg:grid-cols-4">
           {featuredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -63,32 +114,50 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="mb-gutter mt-stack-lg px-margin-mobile">
-        <div className="flex flex-col items-center justify-between gap-gutter rounded-2xl bg-surface-variant/30 p-margin-mobile md:flex-row">
-          <div className="text-center md:text-left">
-            <h3 className="text-2xl font-semibold text-primary">Join the Community</h3>
-            <p className="mt-2 text-base text-on-surface-variant">
-              Get early access to drops and exclusive offers.
+      <section className="mb-24 mt-stack-lg px-margin-mobile">
+        <div className="rounded-3xl bg-primary p-5 text-white shadow-lg">
+          <div className="mb-4 text-center">
+            <h3 className="text-2xl font-bold">Join the Community</h3>
+            <p className="mx-auto mt-2 max-w-[280px] text-sm leading-5 text-white/80">
+              Get early access to new drops, special deals, and exclusive 2Friends offers.
             </p>
           </div>
+
           <form
-            className="flex w-full gap-2 md:w-auto"
+            className="flex flex-col gap-3 sm:flex-row"
             onSubmit={(e) => {
               e.preventDefault()
+              if (communityEmail.trim()) {
+                setJoined(true)
+                setCommunityEmail('')
+              }
             }}
           >
             <input
               type="email"
-              placeholder="Email address"
-              className="flex-grow rounded-full border-none bg-white px-6 py-3 shadow-sm focus:ring-2 focus:ring-primary md:w-64"
+              required
+              value={communityEmail}
+              onChange={(e) => {
+                setCommunityEmail(e.target.value)
+                setJoined(false)
+              }}
+              placeholder="Enter your email"
+              className="min-h-[48px] flex-1 rounded-full border-0 bg-white px-5 text-primary outline-none focus:ring-2 focus:ring-secondary"
             />
+
             <button
               type="submit"
-              className="rounded-full bg-primary px-6 py-3 font-bold text-white transition-all active:scale-95"
+              className="min-h-[48px] rounded-full bg-secondary px-7 font-bold text-white transition-all active:scale-95"
             >
               Join
             </button>
           </form>
+
+          {joined && (
+            <p className="mt-3 text-center text-sm font-medium text-secondary-fixed">
+              Thank you! You joined the 2Friends community.
+            </p>
+          )}
         </div>
       </section>
     </main>

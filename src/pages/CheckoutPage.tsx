@@ -1,15 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Icon } from '../components/Icon'
+import { useAuth } from '../context/AuthContext'
 import { useCart } from '../context/CartContext'
 import { formatPrice } from '../data/products'
+import { placeOrder } from '../services/orders'
 
 type Step = 1 | 2 | 3
 
 export function CheckoutPage() {
   const navigate = useNavigate()
+  const { user } = useAuth()
   const { items, subtotal, updateQuantity, removeItem, clearCart, itemCount } = useCart()
   const [step, setStep] = useState<Step>(1)
+  const [placing, setPlacing] = useState(false)
+  const [orderError, setOrderError] = useState<string | null>(null)
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -17,6 +22,16 @@ export function CheckoutPage() {
     city: '',
     card: '',
   })
+
+  useEffect(() => {
+    if (user) {
+      setForm((f) => ({
+        ...f,
+        name: f.name || user.name,
+        email: f.email || user.email,
+      }))
+    }
+  }, [user])
 
   const shipping = subtotal > 0 ? 9.99 : 0
   const tax = subtotal * 0.08
@@ -150,11 +165,36 @@ export function CheckoutPage() {
       {step === 2 && (
         <section className="mx-auto max-w-lg space-y-stack-lg">
           <h2 className="text-2xl font-semibold text-primary">Checkout Details</h2>
+          {orderError && (
+            <p className="rounded-lg border border-error/30 bg-error/10 px-4 py-3 text-sm text-error">
+              {orderError}
+            </p>
+          )}
           <form
             className="space-y-stack-md rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-margin-mobile shadow-lg"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault()
-              setStep(3)
+              setOrderError(null)
+              setPlacing(true)
+              try {
+                await placeOrder({
+                  userId: user?.id,
+                  customerName: form.name,
+                  customerEmail: form.email,
+                  shippingAddress: form.address,
+                  city: form.city,
+                  items,
+                  subtotal,
+                  shipping,
+                  tax,
+                  total,
+                })
+                setStep(3)
+              } catch (err) {
+                setOrderError(err instanceof Error ? err.message : 'Could not place order')
+              } finally {
+                setPlacing(false)
+              }
             }}
           >
             {[
@@ -193,9 +233,10 @@ export function CheckoutPage() {
               </button>
               <button
                 type="submit"
-                className="flex-1 rounded-lg bg-primary py-3 font-semibold text-on-primary active:scale-[0.98]"
+                disabled={placing}
+                className="flex-1 rounded-lg bg-primary py-3 font-semibold text-on-primary active:scale-[0.98] disabled:opacity-60"
               >
-                Place Order
+                {placing ? 'Placing order…' : 'Place Order'}
               </button>
             </div>
           </form>

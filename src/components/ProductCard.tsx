@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import type { MouseEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { Product } from '../data/products'
 import { formatPrice, formatReviews } from '../data/products'
 import { useCart } from '../context/CartContext'
@@ -10,12 +12,24 @@ type ProductCardProps = {
 }
 
 export function ProductCard({ product, variant = 'compact' }: ProductCardProps) {
+  const navigate = useNavigate()
   const { addItem } = useCart()
   const [liked, setLiked] = useState(false)
 
+  const openProduct = () => {
+    navigate(`/product/${product.id}`)
+  }
+
+  const stopCardClick = (e: MouseEvent) => {
+    e.stopPropagation()
+  }
+
   if (variant === 'full') {
     return (
-      <article className="group relative flex flex-col overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm transition-all hover:shadow-lg">
+      <article
+        onClick={openProduct}
+        className="group relative flex cursor-pointer flex-col overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm transition-all hover:shadow-lg active:scale-[0.99]"
+      >
         <div className="relative aspect-[4/5] overflow-hidden bg-surface-variant">
           <img
             src={product.image}
@@ -25,7 +39,10 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
           />
           <button
             type="button"
-            onClick={() => setLiked(!liked)}
+            onClick={(e) => {
+              stopCardClick(e)
+              setLiked(!liked)
+            }}
             className="absolute top-3 right-3 rounded-full bg-white/80 p-2 shadow-sm backdrop-blur active:scale-75"
             aria-label={liked ? 'Remove from favorites' : 'Add to favorites'}
           >
@@ -41,6 +58,7 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
             </span>
           )}
         </div>
+
         <div className="flex flex-grow flex-col p-4">
           <span className="mb-1 text-xs font-medium tracking-wider text-on-surface-variant uppercase">
             {product.category}
@@ -68,7 +86,10 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
             </div>
             <button
               type="button"
-              onClick={() => addItem(product)}
+              onClick={(e) => {
+                stopCardClick(e)
+                addItem(product)
+              }}
               className="rounded-lg bg-secondary p-2 text-on-secondary active:scale-95"
               aria-label={`Add ${product.name} to cart`}
             >
@@ -81,7 +102,10 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
   }
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm transition-shadow hover:shadow-md">
+    <article
+      onClick={openProduct}
+      className="group flex cursor-pointer flex-col overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm transition-shadow hover:shadow-md active:scale-[0.99]"
+    >
       <div className="relative aspect-square overflow-hidden bg-surface-container">
         <img
           src={product.image}
@@ -91,7 +115,10 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
         />
         <button
           type="button"
-          onClick={() => setLiked(!liked)}
+          onClick={(e) => {
+            stopCardClick(e)
+            setLiked(!liked)
+          }}
           className="absolute top-2 right-2 rounded-full bg-white/80 p-2 backdrop-blur active:scale-90"
           aria-label={liked ? 'Remove from favorites' : 'Add to favorites'}
         >
@@ -102,16 +129,24 @@ export function ProductCard({ product, variant = 'compact' }: ProductCardProps) 
           />
         </button>
       </div>
+
       <div className="flex flex-grow flex-col p-stack-md">
-        <h4 className="line-clamp-1 text-sm font-semibold text-on-surface">{product.name}</h4>
+        <h4 className="line-clamp-1 text-sm font-semibold text-on-surface">
+          {product.name}
+        </h4>
         {product.subtitle && (
           <p className="mt-1 text-sm text-on-surface-variant">{product.subtitle}</p>
         )}
         <div className="mt-auto flex items-center justify-between pt-stack-md">
-          <span className="text-xl font-semibold text-primary">{formatPrice(product.price)}</span>
+          <span className="text-xl font-semibold text-primary">
+            {formatPrice(product.price)}
+          </span>
           <button
             type="button"
-            onClick={() => addItem(product)}
+            onClick={(e) => {
+              stopCardClick(e)
+              addItem(product)
+            }}
             className="flex items-center justify-center rounded-lg bg-secondary p-2 text-white active:scale-90"
             aria-label={`Add ${product.name} to cart`}
           >
